@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Order {
 
-    @JsonProperty("customerName")
+//    @JsonProperty("customerName")
     private String customerName;
 
-    @JsonProperty("productName")
+    //@JsonProperty("productName")
     private String productName;
 
-    @JsonProperty("quantity")
+//    @JsonProperty("quantity")
     private int quantity;
 
     public String getCustomerName() {

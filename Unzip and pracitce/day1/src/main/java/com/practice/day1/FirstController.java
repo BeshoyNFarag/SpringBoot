@@ -15,19 +15,12 @@ public class FirstController {
         return "Hello Controller";
     }
 
-    @GetMapping("/check")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public String check(){
-
-        return "Hello check Controller";
-    }
-
-
     @PostMapping("/user/post")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     @Autowired
     public String printUser( @RequestBody Order order){
         return "welcome the order details are " + order.toString();
     }
+
 
 }
