@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Order {
 
+
+
 //    @JsonProperty("customerName")
     private String customerName;
 
