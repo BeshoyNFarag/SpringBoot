@@ -5,19 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class FirstController {
+public class StudentController {
 
 
-    private final StudentInterface student;
+    private final StudentService studentService;
 
-
-    @Autowired
-    public FirstController(StudentInterface student) {
-        this.student = student;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
 
@@ -27,14 +24,15 @@ public class FirstController {
         return student.findById(studentId).orElse(null);
     }
 
-    @PostMapping("student")
+    @PostMapping("students")
     @ResponseStatus(HttpStatus.CREATED)
-    public void printUser( @RequestBody Student studentInput){
+    public StudentResponseDTO saveStudent( @RequestBody StudentDto dto){
 
-
-         student.save(studentInput);
-
+        return this.studentService.saveStudent(dto);
     }
+
+
+
 
     @GetMapping("students")
     @ResponseStatus(HttpStatus.OK)

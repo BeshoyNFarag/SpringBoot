@@ -1,0 +1,7 @@
+The spring-boot-starter-data-jpa you've already added will automatically include everything you need, including the JDBC API.
+
+For 80-90% of database work, JPA is enough. JDBC API is only needed for special situations.
+
+JPA already has JDBC built-in, so you rarely need to write JDBC code yourself.
+
+JDBC is a low-level API that manually maps Java objects to database tables row by row. JPA is a high-level framework that automatically maps Java objects to database tables for you. so its faster to use JDBC API to handle high stress tasks

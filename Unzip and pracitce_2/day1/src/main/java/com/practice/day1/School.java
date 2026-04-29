@@ -1,6 +1,7 @@
 package com.practice.day1;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,6 +23,7 @@ public class School {
     @OneToMany(
             mappedBy = "school"
     )
+    @JsonManagedReference
     private List<Student> students;
 
     public List<Student> getStudents() {

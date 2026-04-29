@@ -1,5 +1,6 @@
 package com.practice.day1;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,8 +24,9 @@ public class Student {
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "student")
     private StudentBio studentProfile;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "school_id")
+    @JsonBackReference
     private School school;
 
     public School getSchool() {
