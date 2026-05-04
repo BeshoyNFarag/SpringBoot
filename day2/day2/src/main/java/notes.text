@@ -1,0 +1,70 @@
+Task 2: DTO Scenarios
+For the same Library system, identify where you need DTOs:
+
+Create a new Book - what fields should the DTO contain?
+Which fields should be excluded (like auto-generated ID)?
+
+Display a Loan receipt - Borrower name, Book title, borrow date, due date.
+Which entities would this DTO combine?
+
+Update Author information - allow changing only name and nationality, not birth date.
+How would your DTO differ from the Entity?
+
+Think about:
+When is it safe to return an Entity directly?
+When must you use a DTO for security?
+
+
+Task 3: Postman Testing Preparation
+Based on the Library system, plan your API endpoints:
+
+List the HTTP methods and endpoints you would create for:
+
+Find all books by a specific author (path variable for author ID)
+
+Register a new borrower (sending data in request body)
+
+Mark a book as loaned (update operation)
+
+Find all currently borrowed books by a borrower
+
+For each endpoint, specify:
+
+HTTP method (GET, POST, PUT, DELETE)
+
+Request body structure (if any)
+
+Path parameters or query parameters needed
+
+Expected response status codes (200, 201, 404, etc.)
+
+
+
+
+
+Task 5: Your Own Practice Project
+Design a small project of your choice (e.g., Task Manager, Recipe Book, Movie Database, Hotel Booking) with:
+
+Minimum requirements:
+
+At least 3 entities
+
+At least one one-to-many relationship
+
+At least one many-to-many relationship with a join table
+
+At least 5 REST endpoints (GET, POST, PUT, DELETE)
+
+At least 2 different DTOs (different from the entities)
+
+
+
+Task 4: Common Pitfalls Exercise
+Without writing code, identify what happens in these scenarios:
+
+You return a List<Book> directly from a REST controller. Hibernate session is still open. What gets sent to Postman? What if there's a @OneToMany relationship with lazy loading?
+
+You try to save a new Book with an existing Author (by setting author_id). You forget to fetch the Author from database first. What error would you expect?
+
+You have bidirectional @OneToMany and @ManyToOne. You add a Book to Author's book list but forget to set the Author on the Book. What consistency problem occurs?
+
