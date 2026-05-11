@@ -1,6 +1,7 @@
-package com.practice.day1;
+package com.practice.day1.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.practice.day1.school.School;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +10,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int studentId;
 
     @Column(name = "f_name")
     private String fName;
@@ -54,10 +55,12 @@ public class Student {
         this.email = email;
     }
 
+    public int getStudentId() {
+        return studentId;
+    }
 
-    // Getters
-    public int getId() {
-        return id;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     public String getFName() {  // Capital F
@@ -76,10 +79,7 @@ public class Student {
         return email;
     }
 
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setFName(String fName) {  // Capital F
         this.fName = fName;

@@ -1,8 +1,7 @@
-package com.practice.day2;
+package com.practice.day2.model;
 
 import jakarta.persistence.*;
 
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,9 +14,8 @@ public class AuthorEntity {
     int authorId;
     @Column(nullable = false)
     String authorName;
-    @Column(nullable = false)
+
     LocalDate birthdate;
-    @Column(nullable = false)
     String nationality;
 
     @OneToMany(mappedBy = "author")

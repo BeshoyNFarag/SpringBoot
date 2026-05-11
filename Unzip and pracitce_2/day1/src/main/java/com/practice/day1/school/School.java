@@ -1,7 +1,8 @@
-package com.practice.day1;
+package com.practice.day1.school;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.practice.day1.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

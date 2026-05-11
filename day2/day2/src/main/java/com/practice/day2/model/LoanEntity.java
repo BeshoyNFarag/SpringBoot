@@ -1,4 +1,4 @@
-package com.practice.day2;
+package com.practice.day2.model;
 
 
 import jakarta.persistence.*;
