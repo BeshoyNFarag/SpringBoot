@@ -33,7 +33,6 @@ class StudentServiceTest {
     @Test
     void saveStudentTest() {
         // Given - Setup the test data and mock behavior
-
         // Create input DTO using constructor + setters
         StudentDto inputDto = new StudentDto("John",
                 "Doe",
@@ -50,7 +49,10 @@ class StudentServiceTest {
         studentEntity.setAge(20);
 
         // Create expected response DTO using constructor + setters
-        StudentResponseDTO expectedResponse = new StudentResponseDTO("John", "Doe","john.doe@example.com");
+        StudentResponseDTO expectedResponse = new StudentResponseDTO(
+                "John",
+                "Doe",
+                "john.doe@example.com");
 
 
         // Mock the mapper converting DTO to Entity

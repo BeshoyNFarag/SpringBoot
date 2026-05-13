@@ -1,8 +1,8 @@
 package com.practice.day1.student;
 
-import jakarta.validation.constraints.NotEmpty;
+
 import org.junit.jupiter.api.*;
-import org.springframework.boot.test.context.SpringBootTest;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 class StudentMapperTest {
@@ -18,14 +18,18 @@ class StudentMapperTest {
 
     @Test
     public void shouldMapStudenttoDToSudent(){
-
+        //Given: a Student Dto
         StudentDto studentDto = new StudentDto(
                 "Beshoy",
                 "Farag",
                 "beshoynady401@gmail.com",
                 1,
                 23);
+
+        //When: we map the student dto to a student
         Student student = mapper.toStudent(studentDto);
+
+        //Then: the values in both should be equal
         assertEquals(studentDto.fName(), student.getFName());
         assertEquals(studentDto.lName(), student.getLName());
         assertEquals(studentDto.email(), student.getEmail());

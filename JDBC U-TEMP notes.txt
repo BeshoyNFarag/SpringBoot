@@ -5,3 +5,17 @@ For 80-90% of database work, JPA is enough. JDBC API is only needed for special 
 JPA already has JDBC built-in, so you rarely need to write JDBC code yourself.
 
 JDBC is a low-level API that manually maps Java objects to database tables row by row. JPA is a high-level framework that automatically maps Java objects to database tables for you. so its faster to use JDBC API to handle high stress tasks
+
+
+
+docker run -d -v the path to the file where we want to store the data:/var/lib/postgresql/data --> this is the path postgresql uses to store data
+-e POSTGRES_USERNAME= postgres -e POSTGRE_PASSWORD = aliboucoding -p 5432:5432 postgres
+
+docker run -d -v path to be stored in :/var/lib/mysql/data --> what mysql uses for data -e MYSQL_ROOT_PASSWORD = -p 3306:3306 mysql
+
+
+
+
+
+
+
