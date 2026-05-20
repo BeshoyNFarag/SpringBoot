@@ -3,8 +3,8 @@
 /*also the same as java
 * */
 
-let a ;
-a = "hello my name is beshoy";
-console.log(a);
-a = "hello my name is not beshoy";
-console.log(a);
+let myName = "Beshoy";
+
+console.log(myName + " " + myName.length);
+console.log(myName.charAt(0));
+console.log(myName.charAt(myName.length - 5));

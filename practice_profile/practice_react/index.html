@@ -1,13 +1,35 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>practice_react</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>practice_react</title>
+</head>
+<body>
+<div class="js-container"></div>
+<div id="root"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+
+
+<script type="text/babel">
+
+
+  const container = document.querySelector('.js-container');
+  let myName = "beshoy";
+  const div = (<div>
+
+      <button>good job</button>
+      <p>my name is {myName}  </p>
+  </div>);
+
+  ReactDOM.createRoot(container).render(div);
+
+</script>
+</body>
 </html>
