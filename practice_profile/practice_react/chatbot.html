@@ -21,7 +21,19 @@
 
   function ChatInput(){
 
-
+    const chatMessage = [{
+      message: 'hello chatbot' ,
+      sender : 'user'
+    },{
+      message : 'hello how can i help you',
+      sender : 'robot'
+    },{
+      message: 'can you get me today\'s date?',
+      sender: 'user',
+    },{
+      message: 'today is 21 of may',
+      sender: 'robot'
+    }];
     return (
       <>
         <input placeholder="Send a message to the bot" size="50" />
