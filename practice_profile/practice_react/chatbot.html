@@ -21,19 +21,7 @@
 
   function ChatInput(){
 
-    const chatMessage = [{
-      message: 'hello chatbot' ,
-      sender : 'user'
-    },{
-      message : 'hello how can i help you',
-      sender : 'robot'
-    },{
-      message: 'can you get me today\'s date?',
-      sender: 'user',
-    },{
-      message: 'today is 21 of may',
-      sender: 'robot'
-    }];
+
     return (
       <>
         <input placeholder="Send a message to the bot" size="50" />
@@ -63,14 +51,59 @@
 
   }
 
-  function App(){
+  function ChatMessages(){
+    const arr = React.useState(
+            [{
+              message: 'hello chatbot',
+              sender: 'user',
+              id: 'id1'
+            }, {
+              message: 'hello how can i help you',
+              sender: 'robot',
+              id: 'id2'
+            }, {
+              message: 'can you get me today\'s date?',
+              sender: 'user',
+              id: 'id3'
+            }, {
+              message: 'today is 21 of may',
+              sender: 'robot',
+              id: 'id4'
+            }]
+    );
+    const chatMessages = arr[0];
+    const setChatMessages = arr[1];
+
+    function sendMessage(){
+      setChatMessages([...chatMessages]);
+    }
+
     return(
+
+      <>
+
+        <button onClick={sendMessage}>Send Message</button>
+        {chatMessages.map((chatMessage) => {
+              return (
+                      <ChatMessage
+                              key={chatMessage.id}
+                              message={chatMessage.message}
+                              sender={chatMessage.sender}
+                      />
+              )
+            })}
+      </>
+
+    );
+
+  }
+
+  function App() {
+
+
+    return (
             <>
-              <ChatInput/>
-              <ChatMessage message = "hello chatbot" sender= "user"/>
-              <ChatMessage message = "hello how can i help you" sender= "robot"/>
-              <ChatMessage message = "can you get me today's date?" sender= "user"/>
-              <ChatMessage message = "today is 21 of may" sender= "robot"/>
+              <ChatMessages />
             </>
     );
   }
