@@ -4,6 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chatbot</title>
+
+  <style>
+
+    body {
+      font-family: Arial, serif;
+      margin: 0; /* Simplified - removes all margins */
+      padding: 0;
+      height: 100vh; /* Give body full height */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* FIX: Make app container take full height properly */
+    .app-container {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 100vh; /* Full viewport height */
+      display: flex; /* Make this flex too */
+      flex-direction: column; /* Stack children vertically */
+      overflow: hidden; /* Prevent app container from scrolling */
+    }
+
+    /* FIX: Make messages container scrollable */
+    .chat-messages-container {
+      flex-grow: 1; /* Take remaining space */
+      overflow-y: auto; /* Changed from 'scroll' to 'auto' - shows scrollbar only when needed */
+      /* REMOVED: scrollbar-width: none; - this was hiding your scrollbar! */
+      margin-top: 10px;
+      margin-bottom: 10px; /* Add some bottom margin */
+    }
+
+    /* OPTIONAL: Style the scrollbar so it's visible */
+    .chat-messages-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-messages-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .chat-messages-container::-webkit-scrollbar-thumb {
+      background: #086508;
+      border-radius: 10px;
+    }
+
+    /* Keep input container at bottom */
+    .chat-input-container {
+      display: flex;
+      margin-top: auto; /* Push to bottom */
+      padding: 10px;
+    }
+
+    .chat-input {
+      padding: 12px 15px;
+      border-radius: 10px;
+      border-width: 1px;
+      font-size: 15px;
+      flex-grow: 1;
+      /* REMOVED: margin-bottom: 10px; - moved to container */
+    }
+
+    .send-button {
+      background-color: #086508;
+      color: white;
+      padding: 12px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .chat-message-user {
+      display: flex;
+      justify-content: end;
+      padding: 15px 20px;
+      align-items: start;
+    }
+
+    .chat-message-robot {
+      display: flex;
+      justify-content: start;
+      padding: 15px 20px;
+      align-items: start;
+    }
+
+    .chat-message-text {
+      background-color: #777777;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-right: 10px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      max-width: 300px;
+      color: white; /* Added for better contrast */
+    }
+
+    .chat-message-profile {
+      width: 45px;
+    }
+  </style>
 </head>
 <body>
 <div class="js-container"></div>
@@ -20,114 +123,116 @@
 <script type="text/babel">
 
 
-
   function ChatInput({chatMessages, setChatMessages}){
 
     const [inputText , setInputText] = React.useState('');
+
     function SaveInputText(event){
       setInputText(event.target.value);
-
-
-
     }
 
     function sendMessage(){
+      // FIX: Added check to prevent sending empty messages
+      if (inputText.trim() === '') return;
 
-      setChatMessages([...chatMessages,  {
-                message: inputText,
-                sender: 'user',
-                id: crypto.randomUUID()
-              }]
+      setChatMessages([...chatMessages, {
+        message: inputText,
+        sender: 'user',
+        id: crypto.randomUUID()
+      }]);
 
-      );
-
+      // FIX: Clear input after sending message
+      setInputText('');
     }
 
     return (
-
-      <>
-        <input placeholder="Send a message to the bot" size="50" onChange={SaveInputText} value = {inputText} />
-        <button onClick={sendMessage}>Send</button>
-      </>
+            <div className={"chat-input-container"}>
+              <input
+                      placeholder="Send a message to the bot"
+                      size="50"
+                      onChange={SaveInputText}
+                      value={inputText}
+                      className= "chat-input"
+              />
+              <button onClick={sendMessage} className="send-button">Send</button>
+            </div>
     );
   }
 
   function ChatMessage({message, sender}) {
-
-
     return (
+            <div className={sender=== 'user' ? 'chat-message-user' : 'chat-message-robot'}>
+              {sender === 'robot' && (<img src="robot.png" alt="robot photo not found"
+                                           className="chat-message-profile"/>)}
+              <div className="chat-message-text">
+                {message}
+              </div>
 
-      <div>
-          {sender === 'robot' && (<img src="robot.png" alt="robot photo not found" width="50"/>)}
-          {message}
-          {sender === 'user' &&<img src="user.png" alt="user photo not found" width="50"/>}
-
-
-      </div>
+              {sender === 'user' && <img src="user.png" alt="user photo not found"
+                                         className="chat-message-profile"/>}
+            </div>
     );
-
-
   }
 
-  function ChatMessages(){
+  function ChatMessages({chatMessages}){
 
-
-
-
+    // FIX: Added chatMessages as a prop
+    const chatMessagesRef =  React.useRef(null);
+    React.useEffect(()=>{
+        const containerElem= chatMessagesRef.current
+        if(containerElem){
+          containerElem.scrollTop = containerElem.scrollHeight;
+        }
+    }, [chatMessages]);
     return(
-
-      <>
-
-        <button onClick={sendMessage}>Send Message</button>
-        {chatMessages.map((chatMessage) => {
-              return (
-                      <ChatMessage
-                              key={chatMessage.id}
-                              message={chatMessage.message}
-                              sender={chatMessage.sender}
-                      />
-              )
-            })}
-      </>
-
+            <div className="chat-messages-container" ref={chatMessagesRef}>
+              {/* FIX: Removed the stray sendMessage button that wasn't connected to anything */}
+              {chatMessages.map((chatMessage) => {
+                return (
+                        <ChatMessage
+                                key={chatMessage.id}
+                                message={chatMessage.message}
+                                sender={chatMessage.sender}
+                        />
+                )
+              })}
+            </div>
     );
-
   }
 
   function App() {
-
-    const [chatMessages, setChatMessages]  = React.useState
-    (
-
-            [{
-              message: 'hello chatbot',
-              sender: 'user',
-              id: 'id1'
-            }, {
-              message: 'hello how can i help you',
-              sender: 'robot',
-              id: 'id2'
-            }, {
-              message: 'can you get me today\'s date?',
-              sender: 'user',
-              id: 'id3'
-            }, {
-              message: 'today is 21 of may',
-              sender: 'robot',
-              id: 'id4'
-            }]
-    );
-
+    const [chatMessages, setChatMessages] = React.useState([
+      {
+        message: 'hello chatbot',
+        sender: 'user',
+        id: 'id1'
+      },
+      {
+        message: 'hello how can i help you',
+        sender: 'robot',
+        id: 'id2'
+      },
+      {
+        message: 'can you get me today\'s date?',
+        sender: 'user',
+        id: 'id3'
+      },
+      {
+        message: 'today is 21 of may',
+        sender: 'robot',
+        id: 'id4'
+      }
+    ]);
 
     return (
-            <>
-              <ChatInput
-                chatMessages={chatMessages}
-                setChatMessages ={setChatMessages}
+            <div className="app-container">
 
+              <ChatMessages chatMessages={chatMessages} /> {/* FIX: Pass chatMessages as prop */}
+              <ChatInput
+                      chatMessages={chatMessages}
+                      setChatMessages={setChatMessages}
               />
-              <ChatMessages />
-            </>
+            </div>
     );
   }
 
