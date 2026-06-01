@@ -1,0 +1,25 @@
+/* FIX: Make messages container scrollable */
+.chat-messages-container {
+    flex-grow: 1; /* Take remaining space */
+    overflow-y: auto; /* Changed from 'scroll' to 'auto' - shows scrollbar only when needed */
+    /* REMOVED: scrollbar-width: none; - this was hiding your scrollbar! */
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add some bottom margin */
+}
+
+/* OPTIONAL: Style the scrollbar so it's visible */
+.chat-messages-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+
+.chat-messages-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb {
+    background: #086508;
+    border-radius: 10px;
+}
